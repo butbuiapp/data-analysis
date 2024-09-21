@@ -7,4 +7,14 @@
   </parent>
   <groupId>miu.bdt.datacommon</groupId>
   <artifactId>DataCommon</artifactId>
+  
+  <dependencies>
+  	<!-- https://mvnrepository.com/artifact/org.apache.phoenix/phoenix-client -->
+	<dependency>
+	    <groupId>org.apache.phoenix</groupId>
+	    <artifactId>phoenix-client</artifactId>
+	    <version>4.14.1-HBase-1.2</version>
+	</dependency>
+
+  </dependencies>
 </project>

@@ -27,6 +27,26 @@
         <artifactId>okhttp</artifactId>
         <version>4.10.0</version>
     </dependency>
+    
+    <!-- https://mvnrepository.com/artifact/com.opencsv/opencsv -->
+	<dependency>
+	    <groupId>com.opencsv</groupId>
+	    <artifactId>opencsv</artifactId>
+	    <version>5.9</version>
+	</dependency>
+	    
+	<dependency>
+      <groupId>org.java-websocket</groupId>
+      <artifactId>Java-WebSocket</artifactId>
+      <version>1.5.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.protobuf</groupId>
+      <artifactId>protobuf-java</artifactId>
+      <version>4.28.1</version>
+    </dependency>    
+    
   </dependencies>
   
   <repositories>

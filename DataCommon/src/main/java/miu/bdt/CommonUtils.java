@@ -1,0 +1,70 @@
+package miu.bdt;
+
+import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+public class CommonUtils {
+
+	public static List<List<String>> chunkBySize(List<String> list, int size) {
+        List<List<String>> chunks = new ArrayList<>();
+
+        for (int i = 0; i < list.size(); i += size) {
+            int end = Math.min(list.size(), i + size);
+            chunks.add(new ArrayList<>(list.subList(i, end)));
+        }
+
+        return chunks;
+    }
+	
+	public static long countRow(String table) {
+		Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        long rowCount = 0;
+        
+        try {
+        	System.out.println("Loading class...");
+        	// Load the Phoenix JDBC Driver
+            Class.forName("org.apache.phoenix.jdbc.PhoenixDriver");
+            
+            // Connect to the Phoenix JDBC driver
+            connection = DriverManager.getConnection("jdbc:phoenix:quickstart.cloudera:2181:/hbase-unsecure");
+            System.out.println("Connection succeed...");
+            
+            // SQL query to count the number of rows in the table
+            String query = "SELECT COUNT(*) FROM " + table;
+
+            // Prepare and execute the query
+            statement = connection.prepareStatement(query);
+            resultSet = statement.executeQuery();
+            
+            System.out.println("query succeed...");
+            
+            // Retrieve and print the count result
+            if (resultSet.next()) {
+                rowCount = resultSet.getLong(1);
+                System.out.println("Total rows in the table: " + rowCount);
+            }
+
+        } catch (ClassNotFoundException ce) {
+        	ce.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Close the resources
+            try {
+                if (resultSet != null) resultSet.close();
+                if (statement != null) statement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return rowCount;
+	}
+}
