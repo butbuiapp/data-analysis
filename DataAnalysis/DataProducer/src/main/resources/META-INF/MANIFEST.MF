@@ -1,0 +1,1 @@
+Main-Class: miu.bdt.producer.yahoofinance.TickerApplication
