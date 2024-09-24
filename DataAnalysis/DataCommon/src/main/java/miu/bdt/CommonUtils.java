@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class CommonUtils {
+	//private static final InputStream inputStream = CommonUtils.class.getClassLoader().getResourceAsStream("config.properties");
 	
 	public static String getKafkaServer() {
 		// Create a Properties object
@@ -36,6 +37,31 @@ public class CommonUtils {
             e.printStackTrace();
         }
         return server;
+	}
+	
+	public static String[] getHbaseInfo() {
+		// Create a Properties object
+        Properties properties = new Properties();
+        String[] hbaseInfo = new String[2];
+        try (InputStream inputStream = CommonUtils.class.getClassLoader().getResourceAsStream("config.properties")) {
+
+            // Check if input stream is not null
+            if (inputStream == null) {
+                System.out.println("Sorry, unable to find config.properties");
+                return null;
+            }
+
+            // Load the properties file
+            properties.load(inputStream);
+
+            // Read properties
+            hbaseInfo[0] = properties.getProperty("hbase.zookeeper.quorum");
+            hbaseInfo[1] = properties.getProperty("hbase.zookeeper.property.clientPort");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return hbaseInfo;
 	}
 
 	public static List<List<String>> chunkBySize(List<String> list, int size) {

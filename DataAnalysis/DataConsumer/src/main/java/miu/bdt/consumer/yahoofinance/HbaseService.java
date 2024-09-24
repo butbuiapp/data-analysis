@@ -18,6 +18,7 @@ import org.apache.hadoop.hbase.util.Bytes;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import miu.bdt.CommonUtils;
 import miu.bdt.dto.yahoofinance.Ticker;
 
 public class HbaseService {
@@ -41,6 +42,10 @@ public class HbaseService {
     private Connection createConnection() {
     	// Create the configuration
         Configuration config = HBaseConfiguration.create();
+        // Set HBase zookeeper quorum
+        String[] hbaseInfo = CommonUtils.getHbaseInfo();
+        config.set("hbase.zookeeper.quorum", hbaseInfo[0]);  // Update with actual Zookeeper IP/hostname
+        config.set("hbase.zookeeper.property.clientPort", hbaseInfo[1]); // Default port for Zookeeper
 
         // Establish a connection
         Connection connection = null;

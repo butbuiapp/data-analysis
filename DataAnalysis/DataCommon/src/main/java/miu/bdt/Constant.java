@@ -2,7 +2,6 @@ package miu.bdt;
 
 public class Constant {
 	// Kafka config
-	public static final String KAFKA_SERVER_TEMP = "quickstart.cloudera:9092";
     public static final String TOPIC_NAME_WEATHER = "weather_topic"; 
     public static final String TOPIC_NAME_YAHOO_FINANCE = "yahoo_finance_topic"; 
     
