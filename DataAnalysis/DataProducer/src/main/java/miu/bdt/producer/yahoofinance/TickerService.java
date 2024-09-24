@@ -40,7 +40,7 @@ public class TickerService extends WebSocketClient {
         try {
             // Parse Protobuf message
             Yaticker.yaticker tickerMessage = Yaticker.yaticker.parseFrom(messageBytes);
-            System.out.println("Ticker data: " + tickerMessage);
+            //System.out.println("Ticker data: " + tickerMessage);
             
             // publish to Kafka
             kafkaService.publishData(Constant.TOPIC_NAME_YAHOO_FINANCE, map2Ticker(tickerMessage));
@@ -53,8 +53,8 @@ public class TickerService extends WebSocketClient {
 	@Override
 	public void onOpen(ServerHandshake handshakedata) {
         System.out.println("WebSocket connection established.");
-        // Subscribing to a list of tickers - TOP 100 companies
         
+        // Subscribing to a list of tickers - TOP 100 companies        
         String subscribeMessage = "{\"subscribe\": [\"" + String.join("\", \"", tickers) + "\"]}";
         send(subscribeMessage);
     }

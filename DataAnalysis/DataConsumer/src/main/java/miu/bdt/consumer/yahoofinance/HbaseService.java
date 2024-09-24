@@ -88,6 +88,7 @@ public class HbaseService {
         put.addColumn(Bytes.toBytes(COLUMN_FAMILY), Bytes.toBytes("id"), convertToByte(ticker.getId()));
         put.addColumn(Bytes.toBytes(COLUMN_FAMILY), Bytes.toBytes("price"), convertToByte(ticker.getPrice()));
         put.addColumn(Bytes.toBytes(COLUMN_FAMILY), Bytes.toBytes("time"), convertToByte(ticker.getTime()));
+        put.addColumn(Bytes.toBytes(COLUMN_FAMILY), Bytes.toBytes("formattedDateTime"), convertToByte(CommonUtils.convertToDateTime(ticker.getTime())));
         put.addColumn(Bytes.toBytes(COLUMN_FAMILY), Bytes.toBytes("exchange"), convertToByte(ticker.getExchange()));
         put.addColumn(Bytes.toBytes(COLUMN_FAMILY), Bytes.toBytes("quoteType"), convertToByte(ticker.getQuoteType()));
         put.addColumn(Bytes.toBytes(COLUMN_FAMILY), Bytes.toBytes("marketHours"), convertToByte(ticker.getMarketHours()));

@@ -1,5 +1,9 @@
 package miu.bdt;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.io.IOException;
@@ -12,7 +16,17 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class CommonUtils {
-	//private static final InputStream inputStream = CommonUtils.class.getClassLoader().getResourceAsStream("config.properties");
+	
+	public static String convertToDateTime(long epochTimeMillis) {
+		// Convert epoch milliseconds to LocalDateTime
+        LocalDateTime dateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(epochTimeMillis), ZoneId.systemDefault());
+
+        // Format the date as a string
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDate = dateTime.format(formatter);
+
+        return formattedDate;
+	}
 	
 	public static String getKafkaServer() {
 		// Create a Properties object
@@ -87,7 +101,7 @@ public class CommonUtils {
             Class.forName("org.apache.phoenix.jdbc.PhoenixDriver");
             
             // Connect to the Phoenix JDBC driver
-            connection = DriverManager.getConnection("jdbc:phoenix:quickstart.cloudera:2181:/hbase-unsecure");
+            connection = DriverManager.getConnection("jdbc:phoenix:localhost:2181:/hbase-unsecure");
             System.out.println("Connection succeed...");
             
             // SQL query to count the number of rows in the table

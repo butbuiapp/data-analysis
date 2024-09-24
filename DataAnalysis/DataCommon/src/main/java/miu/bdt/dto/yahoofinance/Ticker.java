@@ -18,6 +18,7 @@ public class Ticker {
 	private String id;
 	private float price;
 	private long time;
+	private String formattedDateTime;
 	private String exchange;
 	private String quoteType;
 	private String marketHours;
