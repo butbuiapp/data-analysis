@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Properties;
 import java.util.Set;
 
+import miu.bdt.CommonUtils;
 import miu.bdt.Constant;
 import miu.bdt.dto.weather.Weather;
 import miu.bdt.dto.weather.WeatherData;
@@ -47,7 +48,7 @@ public class WeatherService {
     private KafkaProducer<String, String> getProducer() {
         // create Producer properties
         Properties properties = new Properties();
-        properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, Constant.KAFKA_SERVER);
+        properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, CommonUtils.getKafkaServer());
         properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.setProperty(ProducerConfig.MAX_REQUEST_SIZE_CONFIG, Constant.MESSAGE_SIZE);

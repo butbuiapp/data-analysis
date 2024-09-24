@@ -2,6 +2,7 @@ package miu.bdt.producer.yahoofinance;
 
 import java.util.Properties;
 
+import miu.bdt.CommonUtils;
 import miu.bdt.Constant;
 import miu.bdt.dto.yahoofinance.Ticker;
 
@@ -35,7 +36,7 @@ public class KafkaService {
 	private KafkaProducer<String, String> getProducer() {
         // create Producer properties
         Properties properties = new Properties();
-        properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, Constant.KAFKA_SERVER);
+        properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, CommonUtils.getKafkaServer());
         properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.setProperty(ProducerConfig.MAX_REQUEST_SIZE_CONFIG, Constant.MESSAGE_SIZE);

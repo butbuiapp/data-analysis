@@ -12,7 +12,6 @@ import miu.bdt.dto.weather.Weather;
 public class WeatherApplication {
 	private static final WeatherService service = WeatherService.getInstance();
 
-	private static final int SIZE_CHUNK = 20;
 	private static final ExecutorService executor = Executors.newFixedThreadPool(5);
 
 	public static void main(String[] args) {

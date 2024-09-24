@@ -1,6 +1,9 @@
 package miu.bdt;
 
 import java.util.ArrayList;
+import java.util.Properties;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,6 +12,31 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class CommonUtils {
+	
+	public static String getKafkaServer() {
+		// Create a Properties object
+        Properties properties = new Properties();
+        String server = "";
+        try (InputStream inputStream = CommonUtils.class.getClassLoader().getResourceAsStream("config.properties")) {
+
+            // Check if input stream is not null
+            if (inputStream == null) {
+                System.out.println("Sorry, unable to find config.properties");
+                return null;
+            }
+
+            // Load the properties file
+            properties.load(inputStream);
+
+            // Read properties
+            server = properties.getProperty("kafka.server");
+            System.out.println("Kafka server===" + server);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return server;
+	}
 
 	public static List<List<String>> chunkBySize(List<String> list, int size) {
         List<List<String>> chunks = new ArrayList<>();
