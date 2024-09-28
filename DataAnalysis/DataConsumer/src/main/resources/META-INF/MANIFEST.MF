@@ -1,0 +1,1 @@
+Main-Class: miu.bdt.consumer.yahoofinance.YahooFinanceConsumerApplication
